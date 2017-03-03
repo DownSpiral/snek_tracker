@@ -13,5 +13,13 @@ function injectScript(file_path, tag) {
     script.setAttribute('src', file_path);
     node.appendChild(script);
 }
-injectScript(chrome.extension.getURL('socket.io.min.js'), 'body');
-injectScript(chrome.extension.getURL('content.js'), 'body');
+chrome.storage.local.get("server_address", function(address) {
+  var body = document.getElementsByTagName('body')[0];
+  var input = document.createElement('input');
+  input.setAttribute('style', 'display: none;');
+  input.setAttribute('id', 'server_address');
+  input.value = address.server_address;
+  body.appendChild(input);
+  injectScript(chrome.extension.getURL('socket.io.min.js'), 'body');
+  injectScript(chrome.extension.getURL('content.js'), 'body');
+});

@@ -14,7 +14,8 @@ window.onload = function(e) {
     window.loch.appendChild(img);
     return img;
   }
-  var socket = window.io.connect("localhost:3000");
+  var address = document.getElementById("server_address").value;
+  var socket = window.io.connect(address);
   var images = {};
   socket.on("player_coords", function(coords) {
     var player_ids = Object.keys(coords);
